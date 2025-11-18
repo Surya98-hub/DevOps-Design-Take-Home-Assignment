@@ -158,7 +158,6 @@ Files included:
 ---
 
 # Diagram
-I included a draw.io diagram (`diagram/architecture.drawio`) showing the following components and their relationships. Export to PDF (`diagram/architecture.pdf`) for submission.
 
 **Diagram layout (suggested layers, left→right / top→bottom):**
 1. Client (Browser, Mobile)
