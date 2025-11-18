@@ -8,7 +8,6 @@ Design a UI, API, and Database system using AWS
 This repository contains a design-only solution for deploying a secure, scalable UI, API, and relational database on AWS. The target architecture uses modern managed services (S3 + CloudFront, ECS Fargate, RDS for PostgreSQL) and includes CI/CD, secrets management, monitoring, and high-availability patterns.
 
 Files included:
-- `diagram/architecture.drawio` — draw.io source 
 - `diagram/architecture.pdf` — exported PDF 
 - `README.md` — this file
 
@@ -174,7 +173,5 @@ I included a draw.io diagram (`diagram/architecture.drawio`) showing the followi
 10. Monitoring: CloudWatch, X-Ray, SNS Pager alerts
 11. Optional: Redis (ElastiCache) for caching sessions and DB offload
 12. Optional: S3 lifecycle + backups -> Glacier for long-term retention
-
-Include labels for security groups, IAM roles, and subnets (public/private) and arrows showing traffic flow.
 
 ---
