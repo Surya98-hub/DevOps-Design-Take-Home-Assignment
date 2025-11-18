@@ -117,43 +117,6 @@ Files included:
 
 ---
 
-# Caching & Session Management
-
-- Use **ElastiCache (Redis)** for:
-  - Caching frequent queries, sessions, rate-limiting counters
-  - Pub/Sub if microservices need lightweight messaging
-- Configure TTLs and eviction policies. Use Redis clusters with Multi-AZ.
-- Configure client-side caching headers for static assets.
-
----
-
-# Network & Security
-
-**VPC layout**
-- One VPC with 3 Availability Zones.
-- Public subnets: ALB, NAT Gateway (or NAT Instances) as needed.
-- Private subnets: EC2 instances, RDS, ElastiCache.
-- DB subnet group spanning at least 2 AZs.
-
-**Security groups**
-- ALB SG: inbound HTTPS 443 from 0.0.0.0/0
-- ECS SG: inbound from ALB SG only; outbound to RDS and external APIs
-- RDS SG: inbound from ECS SG (and admin IP SG), no public access
-
-**IAM**
-- Use IAM roles for EC2 instances with least privilege (Secrets Manager read, CloudWatch put metrics, S3 read for assets if required)
-- Create separate roles for CI (GitHub Actions) to push images to ECR and deploy to ECS (use OIDC provider or deploy keys)
-
-**WAF & Shield**
-- Attach **AWS WAF** to CloudFront to block common attacks and rate-limit.
-- Use **AWS Shield** Advanced if under DDoS threat (enterprise level).
-
-**Encryption**
-- TLS in transit via ALB/CloudFront and require TLS between ECS and RDS.
-- At-rest encryption for RDS, EBS volumes, S3, and ElastiCache.
-
----
-
 ## CI/CD Pipeline (Design Only)
 
 **Tooling**: GitHub Actions (recommended)
