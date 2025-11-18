@@ -14,27 +14,6 @@ Files included:
 
 ---
 
-# Diagram
-I included a draw.io diagram (`diagram/architecture.drawio`) showing the following components and their relationships. Export to PDF (`diagram/architecture.pdf`) for submission.
-
-**Diagram layout (suggested layers, left→right / top→bottom):**
-1. Client (Browser, Mobile)
-2. Route 53 (DNS) -> CloudFront -> WAF
-3. CloudFront edge cache -> S3 (UI assets) as origin
-4. CloudFront forwarding / ALB for API routes (`/api/*`) → ALB in public subnets
-5. ALB → EC2 Auto Scaling Group (API Instances) (private subnets, across AZs) → AutoScaling (target tracking on CPU/RPS)
-6. ECS Tasks ((optional ECR if using AMI-builder flow; otherwise handled by Packer/AMIs) image) → connect to RDS (Postgres) in private subnets
-7. RDS primary (Multi-AZ) with read replicas in same region
-8. Secrets Manager / Parameter Store accessed by EC2 instances via IAM role
-9. CI/CD (GitHub Actions) -> pushes to ECR and triggers ECS deployment via AWS Deploy / ECS API
-10. Monitoring: CloudWatch, X-Ray, SNS Pager alerts
-11. Optional: Redis (ElastiCache) for caching sessions and DB offload
-12. Optional: S3 lifecycle + backups -> Glacier for long-term retention
-
-Include labels for security groups, IAM roles, and subnets (public/private) and arrows showing traffic flow.
-
----
-
 ## UI (Frontend) Architecture
 
 **Hosting & routing**
@@ -213,5 +192,26 @@ Include labels for security groups, IAM roles, and subnets (public/private) and 
 **Testing & staging**
 - Keep an environment parity between staging and production but with scaled-down resources.
 - Use database seeding scripts and anonymized production snapshots for realistic testing.
+
+---
+
+# Diagram
+I included a draw.io diagram (`diagram/architecture.drawio`) showing the following components and their relationships. Export to PDF (`diagram/architecture.pdf`) for submission.
+
+**Diagram layout (suggested layers, left→right / top→bottom):**
+1. Client (Browser, Mobile)
+2. Route 53 (DNS) -> CloudFront -> WAF
+3. CloudFront edge cache -> S3 (UI assets) as origin
+4. CloudFront forwarding / ALB for API routes (`/api/*`) → ALB in public subnets
+5. ALB → EC2 Auto Scaling Group (API Instances) (private subnets, across AZs) → AutoScaling (target tracking on CPU/RPS)
+6. ECS Tasks ((optional ECR if using AMI-builder flow; otherwise handled by Packer/AMIs) image) → connect to RDS (Postgres) in private subnets
+7. RDS primary (Multi-AZ) with read replicas in same region
+8. Secrets Manager / Parameter Store accessed by EC2 instances via IAM role
+9. CI/CD (GitHub Actions) -> pushes to ECR and triggers ECS deployment via AWS Deploy / ECS API
+10. Monitoring: CloudWatch, X-Ray, SNS Pager alerts
+11. Optional: Redis (ElastiCache) for caching sessions and DB offload
+12. Optional: S3 lifecycle + backups -> Glacier for long-term retention
+
+Include labels for security groups, IAM roles, and subnets (public/private) and arrows showing traffic flow.
 
 ---
