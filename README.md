@@ -134,8 +134,6 @@ Files included:
 6. Post-deploy smoke tests
 7. Manual approval for production
 
-# Operational Considerations
-
 **Monitoring & Alerts**
 - CloudWatch metrics and logs for ALB/ECS/RDS.
 - X-Ray for tracing requests across API and DB.
