@@ -159,7 +159,7 @@ Files included:
 
 # Diagram
 
-**Diagram layout (suggested layers, left→right / top→bottom):**
+**Diagram layout:**
 1. Client (Browser, Mobile)
 2. Route 53 (DNS) -> CloudFront -> WAF
 3. CloudFront edge cache -> S3 (UI assets) as origin
@@ -170,7 +170,5 @@ Files included:
 8. Secrets Manager / Parameter Store accessed by EC2 instances via IAM role
 9. CI/CD (GitHub Actions) -> pushes to ECR and triggers ECS deployment via AWS Deploy / ECS API
 10. Monitoring: CloudWatch, X-Ray, SNS Pager alerts
-11. Optional: Redis (ElastiCache) for caching sessions and DB offload
-12. Optional: S3 lifecycle + backups -> Glacier for long-term retention
 
 ---
